@@ -108,6 +108,7 @@ Values are case-sensitive:
 - `singleton`: defaults to `true` if omitted; declare it explicitly.
 - `priority`: applies to QuickView and lower values win. Declare it explicitly.
 - `role`: required for Fullscreen and is `Viewer` or `Editor`.
+- `connections`: optional boolean for FilePanel, default `false`. Set it to `true` only when the panel's root listing is saved accounts agents use (servers, profiles, connections); Commander then shows that root as a tab in Configs → Connections, driving it through the plugin's own context menu and `act`. Pair it with `actions.json` so agents can use those accounts.
 
 Filter only `plugin.json`; copying resources through a globally filtered resource block can corrupt icons and native binaries.
 

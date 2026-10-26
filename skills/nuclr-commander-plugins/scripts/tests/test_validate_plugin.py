@@ -145,6 +145,14 @@ class ValidatorTest(unittest.TestCase):
         self.assertEqual(0, code, output)
         self.assertNotIn("ERROR", output)
 
+    def test_connections_must_be_a_boolean(self) -> None:
+        manifest = packaged(SOURCE_MANIFEST)
+        manifest["plugins"][0]["connections"] = "yes"
+        archive = write_bundle(self.project, manifest)
+        code, output = run(str(self.project), "--archive", str(archive))
+        self.assertEqual(1, code, output)
+        self.assertIn("plugins[0].connections must be a boolean", output)
+
     def test_unresolved_placeholder_in_nested_bundle_field_is_an_error(self) -> None:
         manifest = packaged(SOURCE_MANIFEST)
         manifest["plugins"][0]["version"] = "${unresolved}"

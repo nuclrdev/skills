@@ -230,6 +230,11 @@ def validate_manifest(manifest: dict, source: str, props: dict[str, str], projec
                 report.error(f"{where}.priority must be an integer for QuickView")
         elif "priority" in plugin:
             report.warn(f"{where}.priority is ignored for {plugin_type}")
+        if "connections" in plugin:
+            if not isinstance(plugin.get("connections"), bool):
+                report.error(f"{where}.connections must be a boolean")
+            elif plugin_type != "FilePanel":
+                report.warn(f"{where}.connections is ignored for {plugin_type}")
         if plugin_type == "Fullscreen":
             if plugin.get("role") not in VALID_ROLES:
                 report.error(f"{where}.role must be Viewer or Editor for Fullscreen")
